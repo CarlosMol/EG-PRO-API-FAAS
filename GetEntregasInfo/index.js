@@ -5,7 +5,7 @@ module.exports = async function (context, req) {
   const tostadas = [
     { id: 1, marca: "Tosty" },
     { id: 2, marca: "Bimbo" },
-    { id: 3, marca: "Holsum2" },
+    { id: 3, marca: "Holsum23" },
   ];
 
   // Devuelve la lista de marcas de tostadas en la respuesta
