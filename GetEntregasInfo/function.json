@@ -5,8 +5,8 @@
         "type": "httpTrigger",
         "direction": "in",
         "name": "req",
-        "methods": ["get"],
-        "route": "getEntregasInfo"
+        "methods": ["post"],
+        "route": "entregasInfo"
       },
       {
         "type": "http",
