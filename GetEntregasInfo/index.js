@@ -1,14 +1,16 @@
 const axios = require("axios");
+const cors = require('cors');
 
 module.exports = async function (context, req) {
+    // Configuración de CORS
+    const corsMiddleware = cors({
+        origin: '*',
+        methods: ['GET', 'POST', 'OPTIONS'],
+        allowedHeaders: ['Content-Type']
+    });
+    await corsMiddleware(context.req, context.res);
+
     context.log("Consumiendo API externa con Azure Function...");
-    context.res = {
-        headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-            "Access-Control-Allow-Headers": "Content-Type"
-        }
-    }
     try {
         const origins = req.query.origins;
         const destinations = req.query.destinations;
