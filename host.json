@@ -11,5 +11,16 @@
   "extensionBundle": {
     "id": "Microsoft.Azure.Functions.ExtensionBundle",
     "version": "[3.*, 4.0.0)"
+  },
+  "extensions": {
+    "http": {
+      "routePrefix": "api",
+      "maxConcurrentRequests": 5,
+      "maxOutstandingRequests": 30,
+      "cors": {
+        "allowedOrigins": ["*"],
+        "supportCredentials": false
+      }
+    }
   }
 }
