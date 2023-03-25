@@ -5,7 +5,7 @@ const app = express();
 
 app.use(cors());
 
-app.get("/getntregasinfo", async (req, res) => {
+app.get("/api/getEntregasInfo", async (req, res) => {
     try {
         const origins = req.query.origins;
         const destinations = req.query.destinations;
