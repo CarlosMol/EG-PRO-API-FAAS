@@ -4,7 +4,12 @@ module.exports = async function (context, req) {
     context.log("Consumiendo APIi externa con Azure Function...");
 
     try {
-        const response = await axios.get("https://maps.googleapis.com/maps/api/distancematrix/json?destinations=6.84%2C-75.46&origins=6.83%2C-75.46%20%20&mode=walking&key=AIzaSyAEXeXklXIIQ1L8RdL2i4YKFC5hNF2b9R4");
+        const origins = req.query.origins;
+        const destinations = req.query.destinations;
+        const API_KEY = "AIzaSyAEXeXklXIIQ1L8RdL2i4YKFC5hNF2b9R4";
+        const url = `https://maps.googleapis.com/maps/api/distancematrix/json?destinations=${destinations}&origins=${origins}&mode=driving&key=${API_KEY}`
+        
+        const response = await axios.get(url);
 
         context.res = {
             status: 200,
