@@ -1,36 +1,19 @@
-const cors = require("cors")();
-const { exec } = require("child_process");
+const axios = require("axios");
 
 module.exports = async function (context, req) {
-  cors(req, context.res, () => {
-    const destinations = req.body.destinations || "6.84,-75.46";
-    const origins = req.body.origins || "7.83,-75.46";
-    const mode = "driving";
-    const key = "AIzaSyAEXeXklXIIQ1L8RdL2i4YKFC5hNF2b9R4"; // Reemplaza esto con tu propia API key
-    const urlMaps = `https://maps.googleapis.com/maps/api/distancematrix/json?destinations=${destinations}&origins=${origins}&mode=${mode}&key=${key}`;
+    context.log("Consumiendo API externa con Azure Function...");
 
-    exec(`curl ${urlMaps}`, (error, stdout, stderr) => {
-      if (error) {
-        console.error(`Error al ejecutar el comando: ${error}`);
+    try {
+        const response = await axios.get("https://maps.googleapis.com/maps/api/distancematrix/json?destinations=6.84%2C-75.46&origins=6.83%2C-75.46%20%20&mode=walking&key=AIzaSyAEXeXklXIIQ1L8RdL2i4YKFC5hNF2b9R4");
+
         context.res = {
-          status: 500,
-          body: "Error al hacer la solicitud a la API de Google Maps",
-          headers: {
-            "Content-Type": "text/plain",
-          },
+            status: 200,
+            body: response.data
         };
-        context.done();
-        return;
-      }
-      const data = JSON.parse(stdout);
-      context.res = {
-        status: 200,
-        body: data,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-      context.done();
-    });
-  });
+    } catch (error) {
+        context.res = {
+            status: 500,
+            body: "Error al obtener información de la API externa."
+        };
+    }
 };
