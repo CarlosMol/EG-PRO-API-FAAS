@@ -3,12 +3,7 @@ const cors = require('cors');
 
 module.exports = async function (context, req) {
     // Configuración de CORS
-    const corsMiddleware = cors({
-        origin: '*',
-        methods: ['GET', 'POST', 'OPTIONS'],
-        allowedHeaders: ['Content-Type']
-    });
-    await corsMiddleware(context.req, context.res);
+    await cors(context.req, context.res);
 
     context.log("Consumiendo API externa con Azure Function...");
     try {
