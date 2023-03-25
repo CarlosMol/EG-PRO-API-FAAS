@@ -18,7 +18,7 @@ module.exports = async function (context, req) {
       status: 200,
       body: response.data,
       headers: {
-        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Origin": "http://localhost:8081",
       },
     };
   } catch (error) {
@@ -26,7 +26,7 @@ module.exports = async function (context, req) {
       status: 500,
       body: "Error al obtener información de la API externa.",
       headers: {
-        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Origin": "http://localhost:8081",
       },
     };
   }
